@@ -166,7 +166,20 @@ public class AskDataAlexHernández {
         return answer.equalsIgnoreCase(stringTrue);
     }
 
-    public static boolean validateNif(String nif) {
+    public static String askNif(String msg) {
+        String answer;
+        boolean ok = false;
+        do {
+            answer = askString(msg);
+            ok = validateNif(answer.toUpperCase());
+            if (!ok) {
+                System.out.println("Tienes que introducir un Nif correcto.");
+            }
+        } while (!ok);
+        return answer;
+    }
+
+    private static boolean validateNif(String nif) {
         Pattern REGEXP = Pattern.compile("[0-9]{8}[A-Z]");
         String DIGITO_CONTROL = "TRWAGMYFPDXBNJZSQVHLCKE";
         String[] INVALIDOS = new String[]{"00000000T", "00000001R", "99999999R"};
