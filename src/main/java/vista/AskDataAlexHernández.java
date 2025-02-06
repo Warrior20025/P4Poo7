@@ -166,7 +166,7 @@ public class AskDataAlexHernández {
         return answer.equalsIgnoreCase(stringTrue);
     }
 
-    private boolean validateNif(String nif) {
+    public static boolean validateNif(String nif) {
         Pattern REGEXP = Pattern.compile("[0-9]{8}[A-Z]");
         String DIGITO_CONTROL = "TRWAGMYFPDXBNJZSQVHLCKE";
         String[] INVALIDOS = new String[]{"00000000T", "00000001R", "99999999R"};
