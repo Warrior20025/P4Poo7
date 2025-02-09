@@ -12,6 +12,10 @@ public class Electrodomesticos {
         interruptor = false;
     }
 
+    public Electrodomesticos(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     public Electrodomesticos(String descripcion, int potencia, boolean interruptor) {
         this.descripcion = descripcion;
         this.potencia = potencia;
@@ -19,7 +23,6 @@ public class Electrodomesticos {
     }
 
     //getters
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -30,5 +33,10 @@ public class Electrodomesticos {
 
     public boolean isInterruptor() {
         return interruptor;
+    }
+
+    //setter
+    public void setInterruptor(boolean interruptor) {
+        this.interruptor = interruptor;
     }
 }
