@@ -222,7 +222,7 @@ public class Main {
             System.out.println("Ja existeix una casa amb aquest NIF de propietari.");
         } else {
             String name = AskDataAlexHernández.askString("Nom del client: ");
-            int supTeja = AskDataAlexHernández.askInt("Superfície de la teulada: ", "Digues una superfície correcta (min 10)", 11); //todo en el enunciado que tiene que ser mas grande que 10 por tanto el minimo es 11
+            int supTeja = AskDataAlexHernández.askInt("Superfície de la teulada: ", "Digues una superfície correcta (min 10)", 11);
             Casa casa1 = new Casa(nif, name, supTeja);
             casas.add(casa1);
             file.writeCasaInFile(casa1);
