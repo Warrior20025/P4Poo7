@@ -37,19 +37,19 @@ public class ClassFile {
         }
     }
 
-    public void writeClassInFile(Casa c) throws IOException {
+    public void writeCasaInFile(Casa c) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(casasPath, true));
         writer.write(c.getNif() + "-" + c.getNombre() + "-" + c.getsTejado() + "-" + c.isInterruptor());
         writer.newLine();
         writer.close();
     }
 
-//    public void writeClassInFile(PlacaSolar c) throws IOException {
-//        BufferedWriter writer = new BufferedWriter(new FileWriter(placasPath, true));
-//        writer.write(c.getNomProjecte() + "," + c.getNomClient() + "," + c.getNomFreelance() + "," + c.getDurada());
-//        writer.newLine();
-//        writer.close();
-//    }
+    public void writePlacaInFile(PlacaSolar c, Casa s) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(placasPath, true));
+        writer.write( s.getNif()+ "-" + c.getSuperficie() + "-" + c.getPrecio() + "-" + c.getPotencia());
+        writer.newLine();
+        writer.close();
+    }
 //
 //    public void writeClassInFile(Electrodomesticos c) throws IOException {
 //        BufferedWriter writer = new BufferedWriter(new FileWriter(electrosPath, true));

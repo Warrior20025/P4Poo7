@@ -38,6 +38,18 @@ public class Casa {
         return this.nif.equalsIgnoreCase(p.getNif());
     }
 
+    public void añadirPlaca(PlacaSolar p) {
+        placas.add(p);
+    }
+
+    public boolean cabePlaca(int superficiePlaca) {
+        int suma = sTejado;
+        for (PlacaSolar p: placas) {
+            suma -= p.getSuperficie();
+        }
+        return suma >= superficiePlaca;
+    }
+
     //getters
     public String getNif() {
         return nif;
