@@ -46,17 +46,17 @@ public class ClassFile {
 
     public void writePlacaInFile(PlacaSolar c, Casa s) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(placasPath, true));
-        writer.write( s.getNif()+ "-" + c.getSuperficie() + "-" + c.getPrecio() + "-" + c.getPotencia());
+        writer.write( s.getNif() + "-" + c.getSuperficie() + "-" + c.getPrecio() + "-" + c.getPotencia());
         writer.newLine();
         writer.close();
     }
-//
-//    public void writeClassInFile(Electrodomesticos c) throws IOException {
-//        BufferedWriter writer = new BufferedWriter(new FileWriter(electrosPath, true));
-//        writer.write(c.getNomProjecte() + "," + c.getNomClient() + "," + c.getNomFreelance() + "," + c.getDurada());
-//        writer.newLine();
-//        writer.close();
-//    }
+
+    public void writeElectroInFile(Electrodomesticos c, Casa s) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(electrosPath, true));
+        writer.write(s.getNif() + "-" + c.getDescripcion() + "-" + c.getPotencia() + "-" + c.isInterruptor());
+        writer.newLine();
+        writer.close();
+    }
 
 //    public void reWriteClassesInFile(ArrayList<Projecte> projects) throws IOException {
 //        ClassFile file = new ClassFile();
@@ -68,19 +68,47 @@ public class ClassFile {
 //    }
 
     public ArrayList<Casa> readClass() throws IOException {
-        ArrayList<Casa> clase = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader(casasPath));
+        ArrayList<Casa> casas = new ArrayList<>();
+        BufferedReader readerCasa = new BufferedReader(new FileReader(casasPath));
+        BufferedReader readerPlaca = new BufferedReader(new FileReader(placasPath));
+        BufferedReader readerElectros = new BufferedReader(new FileReader(electrosPath));
         String line;
-        while((line = reader.readLine()) != null) {
+        while((line = readerCasa.readLine()) != null) {     //casas
             String[] data = line.split("-");
             String nif = data[0];
             String nombre = data[1];
             int sTejado = Integer.parseInt(data[2]);
-            boolean inter = Boolean.parseBoolean(data[3]);
+            boolean inter = Boolean.parseBoolean(data[3]);      //interruptor
             Casa newHouse = new Casa(nif, nombre, sTejado, inter);
-            clase.add(newHouse);
+            casas.add(newHouse);
         }
-        return clase;
+        while((line = readerPlaca.readLine()) != null) {        //placas
+            String[] data = line.split("-");
+            String nifPlaca = data[0];
+            int superficie = Integer.parseInt(data[1]);
+            double precio = Double.parseDouble(data[2]);
+            int potencia = Integer.parseInt(data[3]);
+            PlacaSolar newPlaca = new PlacaSolar(superficie, precio, potencia);
+            int indexCasa = casas.indexOf(new Casa(nifPlaca));  //con el int cogemos el indice de la casa que tiene ese nif que ha escrito el usuario y si existe nos devuelve un numero mayor o igual a 0 y si no existe devuelve -1
+            if (indexCasa >= 0) {
+                Casa c = casas.get(indexCasa);
+                c.añadirPlaca(newPlaca);
+            }
+        }
+        while((line = readerElectros.readLine()) != null) {     //electrodomesticos
+            String[] data = line.split("-");
+            String nifElectros = data[0];
+            String description = data[1];
+            int potencia = Integer.parseInt(data[2]);
+            boolean inter = Boolean.parseBoolean(data[3]);
+            Electrodomesticos newElectro = new Electrodomesticos(description, potencia, inter);
+            int indexCasa = casas.indexOf(new Casa(nifElectros));  //con el int cogemos el indice de la casa que tiene ese nif que ha escrito el usuario y si existe nos devuelve un numero mayor o igual a 0 y si no existe devuelve -1
+            if (indexCasa >= 0) {
+                Casa c = casas.get(indexCasa);
+                c.añadirElectro(newElectro);
+            }
+        }
+        return casas;
     }
 
 }

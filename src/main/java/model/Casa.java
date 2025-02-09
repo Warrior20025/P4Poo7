@@ -42,6 +42,10 @@ public class Casa {
         placas.add(p);
     }
 
+    public void añadirElectro(Electrodomesticos e) {
+        electros.add(e);
+    }
+
     public boolean cabePlaca(int superficiePlaca) {
         int suma = sTejado;
         for (PlacaSolar p: placas) {
