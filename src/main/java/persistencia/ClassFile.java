@@ -37,6 +37,7 @@ public class ClassFile {
         }
     }
 
+    //writings
     public void writeCasaInFile(Casa c) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(casasPath, true));
         writer.write(c.getNif() + "-" + c.getNombre() + "-" + c.getsTejado() + "-" + c.isInterruptor());
@@ -67,7 +68,8 @@ public class ClassFile {
 //        reWriter.close();
 //    }
 
-    public ArrayList<Casa> readClass() throws IOException {
+    //reading
+    public ArrayList<Casa> readClass() throws IOException {     //reading of files method
         ArrayList<Casa> casas = new ArrayList<>();
         BufferedReader readerCasa = new BufferedReader(new FileReader(casasPath));
         BufferedReader readerPlaca = new BufferedReader(new FileReader(placasPath));

@@ -11,6 +11,7 @@ public class PlacaSolar {
         this.potencia = potencia;
     }
 
+    //getters
     public int getSuperficie() {
         return superficie;
     }
@@ -22,5 +23,4 @@ public class PlacaSolar {
     public int getPotencia() {
         return potencia;
     }
-
 }

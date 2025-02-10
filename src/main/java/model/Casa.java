@@ -10,6 +10,7 @@ public class Casa {
     private ArrayList<PlacaSolar> placas;
     private ArrayList<Electrodomesticos> electros;
 
+    //constructors
     public Casa(String nif) {
         this.nif = nif;
     }
@@ -38,21 +39,22 @@ public class Casa {
         return this.nif.equalsIgnoreCase(p.getNif());
     }
 
-    public void añadirPlaca(PlacaSolar p) {
+    //methods
+    public void añadirPlaca(PlacaSolar p) {     //add panel to the arraylist of the house method
         placas.add(p);
     }
 
-    public void añadirElectro(Electrodomesticos e) {
+    public void añadirElectro(Electrodomesticos e) {    //add appliance to the arraylist of the class method
         electros.add(e);
     }
 
-    public Electrodomesticos getElectro(String description) {
+    public Electrodomesticos getElectro(String description) {       //method to return the object
         int indexElectro = electros.indexOf(new Electrodomesticos(description));
         Electrodomesticos e = electros.get(indexElectro);
         return e;
     }
 
-    public boolean electroExists(String description) {
+    public boolean electroExists(String description) {      //method to check if the object exists
         int indexElectro = electros.indexOf(new Electrodomesticos(description));        //todo da -1 aunque existe el objeto preguntar
         if (indexElectro >= 0) {
             return true;
@@ -60,7 +62,7 @@ public class Casa {
         return false;
     }
 
-    public boolean saltanPlomos() {
+    public boolean saltanPlomos() {     //check if the power of the appliances is higher of the solar panels income power and turn off all in that case method
         if (potenciaElectros() > potenciaPlacas()) {
             for (Electrodomesticos e: electros) {
                 e.setInterruptor(false);
@@ -71,7 +73,7 @@ public class Casa {
         return false;
     }
 
-    private int potenciaPlacas() {
+    private int potenciaPlacas() {      //take all the power income of the solar panels method
         int sumaPotencia = 0;
         for (PlacaSolar p: placas) {
             sumaPotencia += p.getPotencia();
@@ -79,7 +81,7 @@ public class Casa {
         return sumaPotencia;
     }
 
-    private int potenciaElectros() {
+    private int potenciaElectros() {        //get all the power use of the appliances method
         int sumaPotencia = 0;
         for (Electrodomesticos e: electros) {
             if (e.isInterruptor()) {
@@ -89,7 +91,7 @@ public class Casa {
         return sumaPotencia;
     }
 
-    public boolean cabePlaca(int superficiePlaca) {
+    public boolean cabePlaca(int superficiePlaca) {     //check if the solar panel fits in the roof of the house method
         int suma = sTejado;
         for (PlacaSolar p: placas) {
             suma -= p.getSuperficie();
@@ -107,6 +109,10 @@ public class Casa {
     }
 
     public int getsTejado() {
+        return sTejado;
+    }
+
+    public int getsTejadoDisp() {       //get the surface that's free method
         for (PlacaSolar p: placas) {
             sTejado -= p.getSuperficie();
         }
@@ -122,7 +128,8 @@ public class Casa {
         this.interruptor = interruptor;
     }
 
-    public String showList() {
+    //methods
+    public String showList() {      //show the specific house method in the class to use it's information method
         String listaDeCaracteres = "Client: " + nif +
                 " - " + nombre +
                 "\nPlaques solars instal·lades: " + placas.size() +
@@ -154,7 +161,7 @@ public class Casa {
         return listaDeCaracteres;
     }
 
-    private boolean hayEncendidos() {
+    private boolean hayEncendidos() {       //check if there's any appliance on method
         for (Electrodomesticos e: electros) {
             if (e.isInterruptor()) {
                 return true;
@@ -164,11 +171,11 @@ public class Casa {
     }
 
     @Override
-    public String toString() {
+    public String toString() {      //override of "toString" method
         String atributos = "Client: " + nif +
                 " - " + nombre +
                 "\nSuperfície de teulada: " + sTejado +
-                "\nSuperfície disponible: " + getsTejado() + "\n";
+                "\nSuperfície disponible: " + getsTejadoDisp() + "\n";
         if (interruptor) {
             atributos += "Interruptor general: encès";
         }else {

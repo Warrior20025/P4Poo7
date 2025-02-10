@@ -1,6 +1,6 @@
 package vista;
 
-
+//imports
 import model.Casa;
 import model.Electrodomesticos;
 import model.PlacaSolar;
@@ -14,7 +14,7 @@ public class Main {
     private static ArrayList<Casa> casas;
     private static ClassFile file;
 
-    public static void main(String[] args)  {
+    public static void main(String[] args)  {       //main method
         casas = new ArrayList<>();
         try {
             file = new ClassFile();
@@ -58,7 +58,7 @@ public class Main {
         }
     }
 
-    private static void showHouses() {
+    private static void showHouses() {      //show all the houses method
         if (!emptyHouseList()) {
             System.out.println("--- Endolls Solars, S.L. ---" +
                     "Cases enregistrades: " + casas.size());
@@ -71,7 +71,7 @@ public class Main {
         }
     }
 
-    private static void showTheHouse() {
+    private static void showTheHouse() {        //show a specific house method
         if (!emptyHouseList()) {
             String nifCasa = AskDataAlexHernández.askNif("Nif del propietari de la casa: ");
             int indexCasa = casas.indexOf(new Casa(nifCasa));  //con el int cogemos el indice de la casa que tiene ese nif que ha escrito el usuario y si existe nos devuelve un numero mayor o igual a 0 y si no existe devuelve -1
@@ -84,7 +84,7 @@ public class Main {
         }
     }
 
-    private static void turnOffElectros() {
+    private static void turnOffElectros() {     //turn off appliance with a certain description method
         if (!emptyHouseList()) {
             System.out.println("*** Apagar Aparell ***");
             String nifCasa = AskDataAlexHernández.askNif("Nif del propietari de la casa: ");
@@ -113,7 +113,7 @@ public class Main {
         }
     }
 
-    private static void turnOnElectros() {
+    private static void turnOnElectros() {      //turn on an appliance with a certain description method
         if (!emptyHouseList()) {
             System.out.println("*** Encendre Aparell ***");
             String nifCasa = AskDataAlexHernández.askNif("Nif del propietari de la casa: ");
@@ -145,7 +145,7 @@ public class Main {
         }
     }
 
-    private static void turnOnHouse() {
+    private static void turnOnHouse() {     //thurn on the house asked method
         if (!emptyHouseList()) {
             System.out.println("*** Encendre Casa ***");
             String nifCasa = AskDataAlexHernández.askNif("Nif del propietari de la casa: ");
@@ -164,7 +164,7 @@ public class Main {
         }
     }
 
-    private static void createElectro() throws IOException {
+    private static void createElectro() throws IOException {        //create appliance
         if (!emptyHouseList()) {
             System.out.println("*** Nou Aparell ***");
             String nifElectro = AskDataAlexHernández.askNif("Nif del propietari de la casa: ");
@@ -183,7 +183,7 @@ public class Main {
         }
     }
 
-    private static void createPlaca() throws IOException {     //creamos placa
+    private static void createPlaca() throws IOException {     //create solar panel method
         if (!emptyHouseList()) {
             System.out.println("*** Nova Placa Solar ***");
             String nifPlaca = AskDataAlexHernández.askNif("Nif del propietari de la casa: ");       //todo preguntar si se puede hacer un metodo con esto para acortar lineas de codigo
@@ -207,7 +207,7 @@ public class Main {
         }
     }
 
-    private static boolean emptyHouseList() {
+    private static boolean emptyHouseList() {       //checks if the list is empty
         if (casas.isEmpty()) {
             System.out.println("No hi ha cap casa registrada.");
             return true;
@@ -216,7 +216,7 @@ public class Main {
         }
     }
 
-    private static void createHouse() throws IOException {
+    private static void createHouse() throws IOException {      //create house method
         String nif = AskDataAlexHernández.askNif("NIF del client propietari de la casa: ");
         if (casas.contains(new Casa(nif))) {
             System.out.println("Ja existeix una casa amb aquest NIF de propietari.");
@@ -230,7 +230,7 @@ public class Main {
         }
     }
 
-    private static void menu() {
+    private static void menu() {        //menu output
         System.out.println("\n=== Endolls Solars ===\n" +
                 "1. Afegir casa.\n" +
                 "2. Afegir placa.\n" +

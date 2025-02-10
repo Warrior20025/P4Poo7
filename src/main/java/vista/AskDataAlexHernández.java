@@ -166,7 +166,7 @@ public class AskDataAlexHernández {
         return answer.equalsIgnoreCase(stringTrue);
     }
 
-    public static String askNif(String msg) {
+    public static String askNif(String msg) {       //ask nif method to check if it's correct
         String answer;
         boolean ok = false;
         do {
