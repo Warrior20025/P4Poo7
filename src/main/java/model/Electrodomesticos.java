@@ -6,6 +6,12 @@ public class Electrodomesticos {
     private int potencia;
     private boolean interruptor;
 
+    @Override
+    public boolean equals(Object obj) {
+        Electrodomesticos p = (Electrodomesticos) obj;
+        return this.descripcion.equalsIgnoreCase(p.getDescripcion());
+    }
+
     public Electrodomesticos(String descripcion, int potencia) {
         this.descripcion = descripcion;
         this.potencia = potencia;

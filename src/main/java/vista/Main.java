@@ -73,13 +73,10 @@ public class Main {
 
     private static void showTheHouse() {        //show a specific house method
         if (!emptyHouseList()) {
-            String nifCasa = AskDataAlexHernández.askNif("Nif del propietari de la casa: ");
-            int indexCasa = casas.indexOf(new Casa(nifCasa));  //con el int cogemos el indice de la casa que tiene ese nif que ha escrito el usuario y si existe nos devuelve un numero mayor o igual a 0 y si no existe devuelve -1
-            if (indexCasa >= 0) {
-                Casa c = casas.get(indexCasa);
+            int i = preguntarnif();
+            if (i >= 0) {
+                Casa c = casas.get(i);
                 System.out.println(c.showList());
-            } else {
-                System.out.println("No existeix cap casa amb el nif indicat.");
             }
         }
     }
@@ -87,15 +84,14 @@ public class Main {
     private static void turnOffElectros() {     //turn off appliance with a certain description method
         if (!emptyHouseList()) {
             System.out.println("*** Apagar Aparell ***");
-            String nifCasa = AskDataAlexHernández.askNif("Nif del propietari de la casa: ");
-            int indexCasa = casas.indexOf(new Casa(nifCasa));  //con el int cogemos el indice de la casa que tiene ese nif que ha escrito el usuario y si existe nos devuelve un numero mayor o igual a 0 y si no existe devuelve -1
-            if (indexCasa >= 0) {
-                Casa c = casas.get(indexCasa);
+            int i = preguntarnif();
+            if (i >= 0) {
+                Casa c = casas.get(i);
                 if (c.isInterruptor()) {
                     String descripElectro = AskDataAlexHernández.askString("Descripció de l'aparell: ");
                     if (c.electroExists(descripElectro)) {
                         Electrodomesticos electro = c.getElectro(descripElectro);
-                        if (!electro.isInterruptor()) {
+                        if (electro.isInterruptor()) {
                             electro.setInterruptor(false);
                             System.out.println("OK: Aparell apagat.");
                         }else {
@@ -107,8 +103,6 @@ public class Main {
                 }else {
                     System.out.println("La casa está apagada.");
                 }
-            }else {
-                System.out.println("No existeix cap casa amb el nif indicat.");
             }
         }
     }
@@ -116,10 +110,9 @@ public class Main {
     private static void turnOnElectros() {      //turn on an appliance with a certain description method
         if (!emptyHouseList()) {
             System.out.println("*** Encendre Aparell ***");
-            String nifCasa = AskDataAlexHernández.askNif("Nif del propietari de la casa: ");
-            int indexCasa = casas.indexOf(new Casa(nifCasa));  //con el int cogemos el indice de la casa que tiene ese nif que ha escrito el usuario y si existe nos devuelve un numero mayor o igual a 0 y si no existe devuelve -1
-            if (indexCasa >= 0) {
-                Casa c = casas.get(indexCasa);
+            int i = preguntarnif();
+            if (i >= 0) {
+                Casa c = casas.get(i);
                 if (c.isInterruptor()) {
                     String descripElectro = AskDataAlexHernández.askString("Descripció de l'aparell: ");
                     if (c.electroExists(descripElectro)) {
@@ -139,8 +132,6 @@ public class Main {
                 }else {
                     System.out.println("La casa está apagada.");
                 }
-            }else {
-                System.out.println("No existeix cap casa amb el nif indicat.");
             }
         }
     }
@@ -148,18 +139,15 @@ public class Main {
     private static void turnOnHouse() {     //thurn on the house asked method
         if (!emptyHouseList()) {
             System.out.println("*** Encendre Casa ***");
-            String nifCasa = AskDataAlexHernández.askNif("Nif del propietari de la casa: ");
-            int indexCasa = casas.indexOf(new Casa(nifCasa));  //con el int cogemos el indice de la casa que tiene ese nif que ha escrito el usuario y si existe nos devuelve un numero mayor o igual a 0 y si no existe devuelve -1
-            if (indexCasa >= 0) {
-                Casa c = casas.get(indexCasa);
+            int i = preguntarnif();
+            if (i >= 0) {
+                Casa c = casas.get(i);
                 if (c.isInterruptor()) {
                     System.out.println("La casa ja està encesa.");
                 }else {
                     c.setInterruptor(true);
                     System.out.println("OK: Interruptor general activat.");
                 }
-            }else {
-                System.out.println("No existeix cap casa amb el nif indicat.");
             }
         }
     }
@@ -167,30 +155,35 @@ public class Main {
     private static void createElectro() throws IOException {        //create appliance
         if (!emptyHouseList()) {
             System.out.println("*** Nou Aparell ***");
-            String nifElectro = AskDataAlexHernández.askNif("Nif del propietari de la casa: ");
-            int indexCasa = casas.indexOf(new Casa(nifElectro));  //con el int cogemos el indice de la casa que tiene ese nif que ha escrito el usuario y si existe nos devuelve un numero mayor o igual a 0 y si no existe devuelve -1
-            if (indexCasa >= 0) {
+            int i = preguntarnif();
+            if (i >= 0) {
                 String descripElectro = AskDataAlexHernández.askString("Descripció de l'aparell: ");
                 int potenciaElectro = AskDataAlexHernández.askInt("Potència: ", "No pot posar un valor inferior a 1", 1);
-                Casa c = casas.get(indexCasa);
+                Casa c = casas.get(i);
                 Electrodomesticos electro = new Electrodomesticos(descripElectro, potenciaElectro);
                 c.añadirElectro(electro);
                 file.writeElectroInFile(electro, c);
                 System.out.println("OK: Aparell afegit a la casa.");
-            }else {
-                System.out.println("No existeix cap casa amb el nif indicat.");
             }
         }
+    }
+
+    private static int preguntarnif() {
+        String nifElectro = AskDataAlexHernández.askNif("Nif del propietari de la casa: ");
+        int indexCasa = casas.indexOf(new Casa(nifElectro));  //con el int cogemos el indice de la casa que tiene ese nif que ha escrito el usuario y si existe nos devuelve un numero mayor o igual a 0 y si no existe devuelve -1
+        if (indexCasa < 0) {
+            System.out.println("No existeix cap casa amb el nif indicat.");
+        }
+        return indexCasa;
     }
 
     private static void createPlaca() throws IOException {     //create solar panel method
         if (!emptyHouseList()) {
             System.out.println("*** Nova Placa Solar ***");
-            String nifPlaca = AskDataAlexHernández.askNif("Nif del propietari de la casa: ");       //todo preguntar si se puede hacer un metodo con esto para acortar lineas de codigo
-            int indexCasa = casas.indexOf(new Casa(nifPlaca));  //con el int cogemos el indice de la casa que tiene ese nif que ha escrito el usuario y si existe nos devuelve un numero mayor o igual a 0 y si no existe devuelve -1
-            if (indexCasa >= 0) {
+            int i = preguntarnif();
+            if (i >= 0) {
                 int superficiePlaca = AskDataAlexHernández.askInt("Superfície de la placa: ", "No pot posar un valor inferior a 1", 1);
-                Casa c = casas.get(indexCasa);
+                Casa c = casas.get(i);
                 if (c.cabePlaca(superficiePlaca)) {
                     int potenciaPlaca = AskDataAlexHernández.askInt("Potència: ", "No pot posar un valor inferior a 1", 1);
                     double preuPlaca = AskDataAlexHernández.askDouble("Preu de la placa: ", "No pots posar un valor inferior a 1", 1);
@@ -201,8 +194,6 @@ public class Main {
                 }else {
                     System.out.println("La placa no cap a la casa.");
                 }
-            }else {
-                System.out.println("No existeix cap casa amb el nif indicat.");
             }
         }
     }

@@ -55,7 +55,7 @@ public class Casa {
     }
 
     public boolean electroExists(String description) {      //method to check if the object exists
-        int indexElectro = electros.indexOf(new Electrodomesticos(description));        //todo da -1 aunque existe el objeto preguntar
+        int indexElectro = electros.indexOf(new Electrodomesticos(description));
         if (indexElectro >= 0) {
             return true;
         }

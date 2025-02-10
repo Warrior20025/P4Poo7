@@ -179,7 +179,7 @@ public class AskDataAlexHernández {
         return answer;
     }
 
-    private static boolean validateNif(String nif) {
+    private static boolean validateNif(String nif) {    //comprovación de nif, tien uan formula para saver si es real o no
         Pattern REGEXP = Pattern.compile("[0-9]{8}[A-Z]");
         String DIGITO_CONTROL = "TRWAGMYFPDXBNJZSQVHLCKE";
         String[] INVALIDOS = new String[]{"00000000T", "00000001R", "99999999R"};
