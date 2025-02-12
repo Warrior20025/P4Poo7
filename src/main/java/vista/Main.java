@@ -61,7 +61,7 @@ public class Main {
     private static void showHouses() {      //show all the houses method
         if (!emptyHouseList()) {
             System.out.println("--- Endolls Solars, S.L. ---" +
-                    "Cases enregistrades: " + casas.size());
+                    "\nCases enregistrades: " + casas.size());
             int num = 1;
             for (Casa c: casas) {
                 System.out.println("\nCasa " + num);
