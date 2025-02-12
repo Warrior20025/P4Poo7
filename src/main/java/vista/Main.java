@@ -94,6 +94,7 @@ public class Main {
                         if (electro.isInterruptor()) {
                             electro.setInterruptor(false);
                             System.out.println("OK: Aparell apagat.");
+                            file.reWriteElectrosInFile(casas);
                         }else {
                             System.out.println("L'aparell ja estava apagat.");
                         }
@@ -104,7 +105,6 @@ public class Main {
                     System.out.println("La casa está apagada.");
                 }
             }
-            file.reWriteClassesInFile(casas);
         }
     }
 
@@ -123,8 +123,10 @@ public class Main {
                         }else {
                             electro.setInterruptor(true);
                             System.out.println("OK: Aparell encès.");
+                            file.reWriteElectrosInFile(casas);
                             if (c.saltanPlomos()) {
                                 System.out.println("Han saltat els ploms. La casa ha quedat completament apagada.");
+                                file.reWriteCasasInFile(casas);
                             }
                         }
                     }else {
@@ -134,7 +136,6 @@ public class Main {
                     System.out.println("La casa está apagada.");
                 }
             }
-            file.reWriteClassesInFile(casas);
         }
     }
 
@@ -149,9 +150,9 @@ public class Main {
                 }else {
                     c.setInterruptor(true);
                     System.out.println("OK: Interruptor general activat.");
+                    file.reWriteCasasInFile(casas);
                 }
             }
-            file.reWriteClassesInFile(casas);
         }
     }
 

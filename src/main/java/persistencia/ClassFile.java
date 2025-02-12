@@ -61,27 +61,23 @@ public class ClassFile {
     }
 
     //rewrite
-    public void reWriteClassesInFile(ArrayList<Casa> casas) throws IOException {
+    public void reWriteElectrosInFile(ArrayList<Casa> casas) throws IOException {     //method to reWrite the solar panels objects in the text files
+        ClassFile file = new ClassFile();
+        BufferedWriter reWriterPlaca = new BufferedWriter(new FileWriter(electrosPath, false));
+        for (Casa i : casas) {
+            for (Electrodomesticos p: i.getElectros()) {
+                file.writeElectroInFile(p, i);
+            }
+        }
+    }
+
+    public void reWriteCasasInFile(ArrayList<Casa> casas) throws IOException {      //method to reWrite the houses objects in the text files
         ClassFile file = new ClassFile();
         BufferedWriter reWriterCasa = new BufferedWriter(new FileWriter(casasPath, false));
         for (Casa i : casas) {
             file.writeCasaInFile(i);
         }
         reWriterCasa.close();
-        BufferedWriter reWriterPlaca = new BufferedWriter(new FileWriter(placasPath, false));
-        for (Casa i : casas) {
-            for (PlacaSolar p: i.getPlacas()) {
-                file.writePlacaInFile(p, i);
-            }
-        }
-        reWriterPlaca.close();
-        BufferedWriter reWriterElectro = new BufferedWriter(new FileWriter(electrosPath, false));
-        for (Casa i : casas) {
-            for (Electrodomesticos e: i.getElectros()) {
-                file.writeElectroInFile(e, i);
-            }
-        }
-        reWriterElectro.close();
     }
 
     //reading
