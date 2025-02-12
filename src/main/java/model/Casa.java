@@ -123,6 +123,14 @@ public class Casa {
         return interruptor;
     }
 
+    public ArrayList<PlacaSolar> getPlacas() {
+        return placas;
+    }
+
+    public ArrayList<Electrodomesticos> getElectros() {
+        return electros;
+    }
+
     //setters
     public void setInterruptor(boolean interruptor) {
         this.interruptor = interruptor;

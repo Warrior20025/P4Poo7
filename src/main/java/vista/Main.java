@@ -81,7 +81,7 @@ public class Main {
         }
     }
 
-    private static void turnOffElectros() {     //turn off appliance with a certain description method
+    private static void turnOffElectros() throws IOException {     //turn off appliance with a certain description method
         if (!emptyHouseList()) {
             System.out.println("*** Apagar Aparell ***");
             int i = preguntarnif();
@@ -104,10 +104,11 @@ public class Main {
                     System.out.println("La casa está apagada.");
                 }
             }
+            file.reWriteClassesInFile(casas);
         }
     }
 
-    private static void turnOnElectros() {      //turn on an appliance with a certain description method
+    private static void turnOnElectros() throws IOException {      //turn on an appliance with a certain description method
         if (!emptyHouseList()) {
             System.out.println("*** Encendre Aparell ***");
             int i = preguntarnif();
@@ -133,10 +134,11 @@ public class Main {
                     System.out.println("La casa está apagada.");
                 }
             }
+            file.reWriteClassesInFile(casas);
         }
     }
 
-    private static void turnOnHouse() {     //thurn on the house asked method
+    private static void turnOnHouse() throws IOException {     //thurn on the house asked method
         if (!emptyHouseList()) {
             System.out.println("*** Encendre Casa ***");
             int i = preguntarnif();
@@ -149,6 +151,7 @@ public class Main {
                     System.out.println("OK: Interruptor general activat.");
                 }
             }
+            file.reWriteClassesInFile(casas);
         }
     }
 

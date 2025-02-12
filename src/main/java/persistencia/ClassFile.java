@@ -4,6 +4,7 @@ import model.Casa;
 import model.PlacaSolar;
 import model.Electrodomesticos;
 
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -59,14 +60,29 @@ public class ClassFile {
         writer.close();
     }
 
-//    public void reWriteClassesInFile(ArrayList<Projecte> projects) throws IOException {
-//        ClassFile file = new ClassFile();
-//        BufferedWriter reWriter = new BufferedWriter(new FileWriter(filePath, false));
-//        for (Projecte i : projects) {
-//            file.writeClassInFile(i);
-//        }
-//        reWriter.close();
-//    }
+    //rewrite
+    public void reWriteClassesInFile(ArrayList<Casa> casas) throws IOException {
+        ClassFile file = new ClassFile();
+        BufferedWriter reWriterCasa = new BufferedWriter(new FileWriter(casasPath, false));
+        for (Casa i : casas) {
+            file.writeCasaInFile(i);
+        }
+        reWriterCasa.close();
+        BufferedWriter reWriterPlaca = new BufferedWriter(new FileWriter(placasPath, false));
+        for (Casa i : casas) {
+            for (PlacaSolar p: i.getPlacas()) {
+                file.writePlacaInFile(p, i);
+            }
+        }
+        reWriterPlaca.close();
+        BufferedWriter reWriterElectro = new BufferedWriter(new FileWriter(electrosPath, false));
+        for (Casa i : casas) {
+            for (Electrodomesticos e: i.getElectros()) {
+                file.writeElectroInFile(e, i);
+            }
+        }
+        reWriterElectro.close();
+    }
 
     //reading
     public ArrayList<Casa> readClass() throws IOException {     //reading of files method
