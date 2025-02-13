@@ -80,13 +80,11 @@ public class ClassFile {
     }
 
     //reading
-    public ArrayList<Casa> readClass() throws IOException {     //reading of files method
+    public ArrayList<Casa> readClass() throws IOException {     //reading from files method
         ArrayList<Casa> casas = new ArrayList<>();
-        BufferedReader readerCasa = new BufferedReader(new FileReader(casasPath));
-        BufferedReader readerPlaca = new BufferedReader(new FileReader(placasPath));
-        BufferedReader readerElectros = new BufferedReader(new FileReader(electrosPath));
+        BufferedReader reader = new BufferedReader(new FileReader(casasPath));
         String line;
-        while((line = readerCasa.readLine()) != null) {     //casas
+        while((line = reader.readLine()) != null) {     //casas
             String[] data = line.split("-");
             String nif = data[0];
             String nombre = data[1];
@@ -95,7 +93,9 @@ public class ClassFile {
             Casa newHouse = new Casa(nif, nombre, sTejado, inter);
             casas.add(newHouse);
         }
-        while((line = readerPlaca.readLine()) != null) {        //placas
+        reader.close();
+        reader = new BufferedReader(new FileReader(placasPath));
+        while((line = reader.readLine()) != null) {        //placas
             String[] data = line.split("-");
             String nifPlaca = data[0];
             int superficie = Integer.parseInt(data[1]);
@@ -108,7 +108,9 @@ public class ClassFile {
                 c.añadirPlaca(newPlaca);
             }
         }
-        while((line = readerElectros.readLine()) != null) {     //electrodomesticos
+        reader.close();
+        reader = new BufferedReader(new FileReader(electrosPath));
+        while((line = reader.readLine()) != null) {     //electrodomesticos
             String[] data = line.split("-");
             String nifElectros = data[0];
             String description = data[1];
@@ -121,9 +123,7 @@ public class ClassFile {
                 c.añadirElectro(newElectro);
             }
         }
-        readerCasa.close();
-        readerPlaca.close();
-        readerElectros.close();
+        reader.close();
         return casas;
     }
 
