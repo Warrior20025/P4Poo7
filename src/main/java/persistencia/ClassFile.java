@@ -39,21 +39,21 @@ public class ClassFile {
     }
 
     //writings
-    public void writeCasaInFile(Casa c) throws IOException {
+    public void writeCasaInFile(Casa c) throws IOException {        //write house in file method
         BufferedWriter writer = new BufferedWriter(new FileWriter(casasPath, true));
         writer.write(c.getNif() + "-" + c.getNombre() + "-" + c.getsTejado() + "-" + c.isInterruptor());
         writer.newLine();
         writer.close();
     }
 
-    public void writePlacaInFile(PlacaSolar c, Casa s) throws IOException {
+    public void writePlacaInFile(PlacaSolar c, Casa s) throws IOException {     //write placa in file method
         BufferedWriter writer = new BufferedWriter(new FileWriter(placasPath, true));
         writer.write( s.getNif() + "-" + c.getSuperficie() + "-" + c.getPrecio() + "-" + c.getPotencia());
         writer.newLine();
         writer.close();
     }
 
-    public void writeElectroInFile(Electrodomesticos c, Casa s) throws IOException {
+    public void writeElectroInFile(Electrodomesticos c, Casa s) throws IOException {        //write appliance in file method
         BufferedWriter writer = new BufferedWriter(new FileWriter(electrosPath, true));
         writer.write(s.getNif() + "-" + c.getDescripcion() + "-" + c.getPotencia() + "-" + c.isInterruptor());
         writer.newLine();

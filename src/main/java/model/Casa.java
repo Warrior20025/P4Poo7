@@ -91,7 +91,7 @@ public class Casa {
         return sumaPotencia;
     }
 
-    public boolean cabePlaca(int superficiePlaca) {     //check if the solar panel fits in the roof of the house method
+    public boolean cabePlaca(int superficiePlaca) {     //check if the solar panel fits in the house roof method
         int suma = sTejado;
         for (PlacaSolar p: placas) {
             suma -= p.getSuperficie();
@@ -121,10 +121,6 @@ public class Casa {
 
     public boolean isInterruptor() {
         return interruptor;
-    }
-
-    public ArrayList<PlacaSolar> getPlacas() {
-        return placas;
     }
 
     public ArrayList<Electrodomesticos> getElectros() {
