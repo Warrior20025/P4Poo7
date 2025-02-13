@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 /**
  * @author WarriorDescens
  */
-public class AskDataAlexHernández {
+public class AskDataAlexHernandez {
 
     // atributo para pedir datos al usuario
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

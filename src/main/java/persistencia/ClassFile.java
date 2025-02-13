@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class ClassFile {
-
+    ClassFile file = new ClassFile();
     String casasFile = "cases.txt";
     String placasFile = "plaques.txt";
     String electrosFile = "aparells.txt";
@@ -62,17 +62,16 @@ public class ClassFile {
 
     //rewrite
     public void reWriteElectrosInFile(ArrayList<Casa> casas) throws IOException {     //method to reWrite the solar panels objects in the text files
-        ClassFile file = new ClassFile();
         BufferedWriter reWriterPlaca = new BufferedWriter(new FileWriter(electrosPath, false));
         for (Casa i : casas) {
             for (Electrodomesticos p: i.getElectros()) {
                 file.writeElectroInFile(p, i);
             }
         }
+        reWriterPlaca.close();
     }
 
     public void reWriteCasasInFile(ArrayList<Casa> casas) throws IOException {      //method to reWrite the houses objects in the text files
-        ClassFile file = new ClassFile();
         BufferedWriter reWriterCasa = new BufferedWriter(new FileWriter(casasPath, false));
         for (Casa i : casas) {
             file.writeCasaInFile(i);
@@ -122,6 +121,9 @@ public class ClassFile {
                 c.añadirElectro(newElectro);
             }
         }
+        readerCasa.close();
+        readerPlaca.close();
+        readerElectros.close();
         return casas;
     }
 

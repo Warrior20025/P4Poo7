@@ -22,7 +22,7 @@ public class Main {
             int opcion;
             do {
                 menu();
-                opcion = AskDataAlexHernández.askInt("Què vols fer? ", "Digues una opció correcta.", 1, 9);
+                opcion = AskDataAlexHernandez.askInt("Què vols fer? ", "Digues una opció correcta.", 1, 9);
                 switch (opcion) {
                     case 1:
                         createHouse();
@@ -73,7 +73,7 @@ public class Main {
 
     private static void showTheHouse() {        //show a specific house method
         if (!emptyHouseList()) {
-            int i = preguntarnif();
+            int i = preguntarCasa();
             if (i >= 0) {
                 Casa c = casas.get(i);
                 System.out.println(c.showList());
@@ -84,11 +84,11 @@ public class Main {
     private static void turnOffElectros() throws IOException {     //turn off appliance with a certain description method
         if (!emptyHouseList()) {
             System.out.println("*** Apagar Aparell ***");
-            int i = preguntarnif();
+            int i = preguntarCasa();
             if (i >= 0) {
                 Casa c = casas.get(i);
                 if (c.isInterruptor()) {
-                    String descripElectro = AskDataAlexHernández.askString("Descripció de l'aparell: ");
+                    String descripElectro = AskDataAlexHernandez.askString("Descripció de l'aparell: ");
                     if (c.electroExists(descripElectro)) {
                         Electrodomesticos electro = c.getElectro(descripElectro);
                         if (electro.isInterruptor()) {
@@ -111,11 +111,11 @@ public class Main {
     private static void turnOnElectros() throws IOException {      //turn on an appliance with a certain description method
         if (!emptyHouseList()) {
             System.out.println("*** Encendre Aparell ***");
-            int i = preguntarnif();
+            int i = preguntarCasa();
             if (i >= 0) {
                 Casa c = casas.get(i);
                 if (c.isInterruptor()) {
-                    String descripElectro = AskDataAlexHernández.askString("Descripció de l'aparell: ");
+                    String descripElectro = AskDataAlexHernandez.askString("Descripció de l'aparell: ");
                     if (c.electroExists(descripElectro)) {
                         Electrodomesticos electro = c.getElectro(descripElectro);
                         if (electro.isInterruptor()) {
@@ -123,11 +123,11 @@ public class Main {
                         }else {
                             electro.setInterruptor(true);
                             System.out.println("OK: Aparell encès.");
-                            file.reWriteElectrosInFile(casas);
                             if (c.saltanPlomos()) {
                                 System.out.println("Han saltat els ploms. La casa ha quedat completament apagada.");
                                 file.reWriteCasasInFile(casas);
                             }
+                            file.reWriteElectrosInFile(casas);
                         }
                     }else {
                         System.out.println("No hi ha cap aparell amb aquesta descripció.");
@@ -142,13 +142,13 @@ public class Main {
     private static void turnOnHouse() throws IOException {     //thurn on the house asked method
         if (!emptyHouseList()) {
             System.out.println("*** Encendre Casa ***");
-            int i = preguntarnif();
+            int i = preguntarCasa();
             if (i >= 0) {
                 Casa c = casas.get(i);
                 if (c.isInterruptor()) {
                     System.out.println("La casa ja està encesa.");
                 }else {
-                    c.setInterruptor(true);
+                    c.turnOnHouse();
                     System.out.println("OK: Interruptor general activat.");
                     file.reWriteCasasInFile(casas);
                 }
@@ -159,10 +159,10 @@ public class Main {
     private static void createElectro() throws IOException {        //create appliance
         if (!emptyHouseList()) {
             System.out.println("*** Nou Aparell ***");
-            int i = preguntarnif();
+            int i = preguntarCasa();
             if (i >= 0) {
-                String descripElectro = AskDataAlexHernández.askString("Descripció de l'aparell: ");
-                int potenciaElectro = AskDataAlexHernández.askInt("Potència: ", "No pot posar un valor inferior a 1", 1);
+                String descripElectro = AskDataAlexHernandez.askString("Descripció de l'aparell: ");
+                int potenciaElectro = AskDataAlexHernandez.askInt("Potència: ", "No pot posar un valor inferior a 1", 1);
                 Casa c = casas.get(i);
                 Electrodomesticos electro = new Electrodomesticos(descripElectro, potenciaElectro);
                 c.añadirElectro(electro);
@@ -172,11 +172,12 @@ public class Main {
         }
     }
 
-    private static int preguntarnif() {
-        String nifElectro = AskDataAlexHernández.askNif("Nif del propietari de la casa: ");
+    private static int preguntarCasa() {
+        String nifElectro = AskDataAlexHernandez.askNif("Nif del propietari de la casa: ");
         int indexCasa = casas.indexOf(new Casa(nifElectro));  //con el int cogemos el indice de la casa que tiene ese nif que ha escrito el usuario y si existe nos devuelve un numero mayor o igual a 0 y si no existe devuelve -1
         if (indexCasa < 0) {
             System.out.println("No existeix cap casa amb el nif indicat.");
+
         }
         return indexCasa;
     }
@@ -184,13 +185,13 @@ public class Main {
     private static void createPlaca() throws IOException {     //create solar panel method
         if (!emptyHouseList()) {
             System.out.println("*** Nova Placa Solar ***");
-            int i = preguntarnif();
+            int i = preguntarCasa();
             if (i >= 0) {
-                int superficiePlaca = AskDataAlexHernández.askInt("Superfície de la placa: ", "No pot posar un valor inferior a 1", 1);
+                int superficiePlaca = AskDataAlexHernandez.askInt("Superfície de la placa: ", "No pot posar un valor inferior a 1", 1);
                 Casa c = casas.get(i);
                 if (c.cabePlaca(superficiePlaca)) {
-                    int potenciaPlaca = AskDataAlexHernández.askInt("Potència: ", "No pot posar un valor inferior a 1", 1);
-                    double preuPlaca = AskDataAlexHernández.askDouble("Preu de la placa: ", "No pots posar un valor inferior a 1", 1);
+                    int potenciaPlaca = AskDataAlexHernandez.askInt("Potència: ", "No pot posar un valor inferior a 1", 1);
+                    double preuPlaca = AskDataAlexHernandez.askDouble("Preu de la placa: ", "No pots posar un valor inferior a 1", 1);
                     PlacaSolar placa = new PlacaSolar(superficiePlaca, preuPlaca, potenciaPlaca);
                     c.añadirPlaca(placa);
                     file.writePlacaInFile(placa, c);
@@ -212,12 +213,12 @@ public class Main {
     }
 
     private static void createHouse() throws IOException {      //create house method
-        String nif = AskDataAlexHernández.askNif("NIF del client propietari de la casa: ");
+        String nif = AskDataAlexHernandez.askNif("NIF del client propietari de la casa: ");
         if (casas.contains(new Casa(nif))) {
             System.out.println("Ja existeix una casa amb aquest NIF de propietari.");
         } else {
-            String name = AskDataAlexHernández.askString("Nom del client: ");
-            int supTeja = AskDataAlexHernández.askInt("Superfície de la teulada: ", "Digues una superfície correcta (min 10)", 11);
+            String name = AskDataAlexHernandez.askString("Nom del client: ");
+            int supTeja = AskDataAlexHernandez.askInt("Superfície de la teulada: ", "Digues una superfície correcta (min 10)", 11);
             Casa casa1 = new Casa(nif, name, supTeja);
             casas.add(casa1);
             file.writeCasaInFile(casa1);

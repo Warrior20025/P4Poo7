@@ -67,7 +67,7 @@ public class Casa {
             for (Electrodomesticos e: electros) {
                 e.setInterruptor(false);
             }
-            setInterruptor(false);
+            interruptor = false;
             return true;
         }
         return false;
@@ -132,8 +132,8 @@ public class Casa {
     }
 
     //setters
-    public void setInterruptor(boolean interruptor) {
-        this.interruptor = interruptor;
+    public void turnOnHouse() {
+        interruptor = true;
     }
 
     //methods
